@@ -11,7 +11,7 @@ function App() {
   const [weatherData, setWeatherData] = useState(null);
   const [parametres, setParametres] = useState();
   const [filterOfCitiesData, setFilterOfCitiesData] = useState([]);
-  const urlWeather = parametres ? `https://api.openweathermap.org/data/2.5/weather?q=${parametres.name}&lat=${parametres.lat}&lon=${parametres.lon}&lang=ru&appid=ef39a5795fb04eb3341169de5bc3e9be` : '';
+  const urlWeather = parametres ? `https://api.openweathermap.org/data/2.5/weather?q=${parametres.name}&lat=${parametres.lat}&lon=${parametres.lon}&lang=ru&appid=<YOUR_TOKEN>` : '';
   
 
   useEffect(() => {
