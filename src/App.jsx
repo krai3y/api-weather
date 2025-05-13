@@ -11,7 +11,8 @@ function App() {
   const [weatherData, setWeatherData] = useState(null);
   const [parametres, setParametres] = useState();
   const [filterOfCitiesData, setFilterOfCitiesData] = useState([]);
-  const urlWeather = parametres ? `https://api.openweathermap.org/data/2.5/weather?q=${parametres.name}&lat=${parametres.lat}&lon=${parametres.lon}&lang=ru&appid=<YOUR_TOKEN>` : '';
+  const token = 'YOUT_TOKEN';
+  const urlWeather = parametres ? `https://api.openweathermap.org/data/2.5/weather?q=${parametres.name}&lat=${parametres.lat}&lon=${parametres.lon}&lang=ru&appid=${token}` : '';
   
 
   useEffect(() => {
@@ -71,7 +72,6 @@ function App() {
   
   return (
     <main class="w-full h-dvh">
-      <img src="arrow.png" alt="" />
       {!citySelected ? (
         <SelectCity
           setCitySelected = {setCitySelected}
