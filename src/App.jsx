@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
 
 import "./index.css";
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/scrollbar';
 import citiesData from "./data/csvjson.json"; 
 import SelectCity from "./components/SelectCity";
 import WeatherOfCity from "./components/WeatherOfCity";
@@ -11,7 +15,8 @@ function App() {
   const [weatherData, setWeatherData] = useState(null);
   const [parametres, setParametres] = useState();
   const [filterOfCitiesData, setFilterOfCitiesData] = useState([]);
-  const token = 'YOUT_TOKEN';
+  // const token = 'YOUT_TOKEN';
+  const token = '4ec39ca0bb39d7b20c1f2acdb271f1fc';
   const urlWeather = parametres ? `https://api.openweathermap.org/data/2.5/weather?q=${parametres.name}&lat=${parametres.lat}&lon=${parametres.lon}&lang=ru&appid=${token}` : '';
   
 

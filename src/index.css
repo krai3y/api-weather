@@ -1,1 +1,5 @@
 @import "tailwindcss";
+
+:root {
+  --swiper-navigation-color: #8e51ff; /* Или любой другой цвет */
+}

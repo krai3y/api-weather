@@ -1,5 +1,7 @@
 import React from 'react'
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Scrollbar, A11y, Autoplay } from 'swiper/modules';
 import iconArray from "../data/icon"
 import arrow from "../assets/arrow.png"
 
@@ -20,7 +22,15 @@ function WeatherOfCity({ setParametres, setFoundedCities, setCitySelected, weath
   
   return (
     <div>
-        <div>
+        <Swiper 
+          className='relative border border-violet-500 border-4 rounded-xl max-w-lg'
+          modules={[Navigation, Scrollbar, A11y, Autoplay]}
+          navigation
+          autoplay={{
+            delay: 2500,
+            disableOnInteraction: false,
+          }}
+        >
           {/* <img 
             src={arrow}
             onClick={() => {
@@ -28,21 +38,12 @@ function WeatherOfCity({ setParametres, setFoundedCities, setCitySelected, weath
               setFoundedCities([]);
               setCitySelected(false);
             }}
-          /> */}
-        </div>
-        <div className='relative border border-violet-500 border-4 rounded-xl m-40'>
-          <img 
-            src={arrow}
-            onClick={() => {
-              setParametres();
-              setFoundedCities([]);
-              setCitySelected(false);
-            }}
             className='absolute top-0 left-0'
-          />
-          <div className="flex items-center flex-col justify-center">
+          /> */}
+
+          <SwiperSlide className="flex items-center flex-col justify-center">
             <h1 class="text-center text-violet-500 text-5xl font-bold">{weatherData.name}</h1>
-            <div  >
+            <div>
               <DotLottieReact
                 src={getSrc()}
                 loop
@@ -50,12 +51,14 @@ function WeatherOfCity({ setParametres, setFoundedCities, setCitySelected, weath
               />
             </div>
             <h3 className="text-center text-violet-500 text-5xl font-bold">{Math.round(weatherData?.main.temp - 273.15)} °C</h3>
+          </SwiperSlide>
+          <SwiperSlide className="flex items-center flex-col justify-center">
             <h3>Состояние: {weatherData.weather[0].description}</h3>
             <h3>Скорость ветра: {weatherData.wind.speed} м/с</h3>
             <h3>Восход: {getTime(weatherData.sys.sunrise)}</h3>
             <h3>Закат: {getTime(weatherData.sys.sunset)}</h3>
-          </div>
-        </div>
+          </SwiperSlide>
+        </Swiper>
     </div>
   )
 }
