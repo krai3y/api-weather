@@ -21,13 +21,13 @@ function WeatherOfCity({ setParametres, setFoundedCities, setCitySelected, weath
   }
   
   return (
-    <div>
+    <div className='flex items-center justify-center min-h-screen'>
         <Swiper 
           className='relative border border-violet-500 border-4 rounded-xl max-w-lg'
-          modules={[Navigation, Scrollbar, A11y, Autoplay]}
+          modules={[Navigation, Scrollbar, A11y]}
           navigation
           autoplay={{
-            delay: 2500,
+            delay: 3000,
             disableOnInteraction: false,
           }}
         >
@@ -41,7 +41,7 @@ function WeatherOfCity({ setParametres, setFoundedCities, setCitySelected, weath
             className='absolute top-0 left-0'
           /> */}
 
-          <SwiperSlide className="flex items-center flex-col justify-center">
+          <SwiperSlide className="flex items-center flex-col justify-center p-5">
             <h1 class="text-center text-violet-500 text-5xl font-bold">{weatherData.name}</h1>
             <div>
               <DotLottieReact
@@ -52,11 +52,20 @@ function WeatherOfCity({ setParametres, setFoundedCities, setCitySelected, weath
             </div>
             <h3 className="text-center text-violet-500 text-5xl font-bold">{Math.round(weatherData?.main.temp - 273.15)} °C</h3>
           </SwiperSlide>
-          <SwiperSlide className="flex items-center flex-col justify-center">
-            <h3>Состояние: {weatherData.weather[0].description}</h3>
-            <h3>Скорость ветра: {weatherData.wind.speed} м/с</h3>
-            <h3>Восход: {getTime(weatherData.sys.sunrise)}</h3>
-            <h3>Закат: {getTime(weatherData.sys.sunset)}</h3>
+          <SwiperSlide
+           className="text-center p-5"
+           style={{ height: "auto" }}
+          >
+            <div className="grid grid-cols-2 gap-4 items-center h-full text-violet-500 font-bold">
+              <p>Состояние:</p>
+              <p>{weatherData.weather[0].description}</p>
+              <p>Скорость ветра:</p>
+              <p>{weatherData.wind.speed} м/с</p>
+              <p>Восход:</p>
+              <p>{getTime(weatherData.sys.sunrise)}</p>
+              <p>Закат:</p>
+              <p>{getTime(weatherData.sys.sunset)}</p>
+            </div>
           </SwiperSlide>
         </Swiper>
     </div>
