@@ -1,14 +1,26 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import krestik from "../assets/krestik.svg"
 
 function SelectCity({ setCitySelected, setParametres, setFoundedCities, foundedCities, searchHandler }) {
+  const [valueInput, setValueInput] = useState('');
+
+  useEffect(() => {
+    searchHandler(valueInput)
+  }, [valueInput])
 
   return (
     <div class="flex items-center flex-col justify-center min-h-screen">
-        <div class="flex items-end">
+        <div class={`relative flex items-end border-3 border-violet-500 hover:bg-violet-100 ${foundedCities.length ? "rounded-t-[25px]" : "rounded-[25px]"} w-200`}>
           <input 
             type="text"
-            onChange={(e) => searchHandler(e)}
-            class={`border-3 border-violet-500 hover:bg-violet-100 focus:outline-0 font-bold text-violet-500 text-lg w-200  ${foundedCities.length ? "rounded-t-[25px]" : "rounded-[25px]"} p-6`}  
+            value={valueInput}
+            onChange={(e) => setValueInput(e.target.value)}
+            class="focus:outline-0 font-bold text-violet-500 text-lg w-200 p-6"  
+          />
+          <img 
+            className="my-auto me-2 cursor-pointer"
+            src={krestik}
+            onClick={() => {setFoundedCities([]); setValueInput('')}}
           />
         </div>
         <div class="flex flex-col items-center divide-y-3">

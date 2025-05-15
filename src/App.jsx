@@ -60,8 +60,8 @@ function App() {
 
   }, []);
   
-  function searchHandler(e) {
-    let cityToSearch = e.target.value;
+  function searchHandler(value) {
+    let cityToSearch = value;
 
     if (cityToSearch.trim().length) {
       cityToSearch = cityToSearch.trim()[0].toUpperCase() + cityToSearch.slice(1, cityToSearch.length + 1).toLowerCase();
