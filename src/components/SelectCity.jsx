@@ -17,17 +17,19 @@ function SelectCity({ setCitySelected, setParametres, setFoundedCities, foundedC
             onChange={(e) => setValueInput(e.target.value)}
             class="focus:outline-0 font-bold text-violet-500 text-lg w-200 p-6"  
           />
-          <img 
-            className="my-auto me-2 cursor-pointer"
-            src={krestik}
-            onClick={() => {setFoundedCities([]); setValueInput('')}}
-          />
+          {valueInput && (
+            <img 
+              className="border-l-3 border-violet-500 my-auto me-2 cursor-pointer"
+              src={krestik}
+              onClick={() => {setFoundedCities([]); setValueInput('')}}
+            />
+          )}
         </div>
         <div class="flex flex-col items-center divide-y-3">
           {foundedCities.map(city => {
             return(
               <button
-                class={`border-x-3 border-violet-500 hover:bg-violet-100 text-violet-500 font-bold text-lg cursor-pointer w-200 ${city.name == foundedCities[foundedCities.length - 1].name ? 'border-b-3 rounded-b-[25px]' : ''} p-6`}
+                class={`border-x-3 border-violet-500 hover:bg-violet-100 text-violet-500 font-bold text-lg cursor-pointer w-200 ${city.name == foundedCities[foundedCities.length - 1].name && 'border-b-3 rounded-b-[25px]'} p-6`}
                 key={city.id}
                 onClick={() => {
                   setParametres({

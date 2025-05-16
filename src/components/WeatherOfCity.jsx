@@ -1,11 +1,10 @@
 import React from 'react'
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Scrollbar, A11y, Autoplay } from 'swiper/modules';
+import { Navigation, Scrollbar } from 'swiper/modules';
 import iconArray from "../data/icon"
-import arrow from "../assets/arrow.png"
 
-function WeatherOfCity({ setParametres, setFoundedCities, setCitySelected, weatherData }) {
+function WeatherOfCity({ weatherData }) {
 
   function getSrc() {
     return(
@@ -26,22 +25,13 @@ function WeatherOfCity({ setParametres, setFoundedCities, setCitySelected, weath
     <div className='flex items-center justify-center min-h-screen'>
       <Swiper 
         className='relative border border-violet-500 border-4 rounded-xl max-w-lg'
-        modules={[Navigation, Scrollbar, A11y]}
+        modules={[Navigation, Scrollbar]}
         navigation
         autoplay={{
           delay: 3000,
           disableOnInteraction: false,
         }}
       >
-        {/* <img 
-          src={arrow}
-          onClick={() => {
-            setParametres();
-            setFoundedCities([]);
-            setCitySelected(false);
-          }}
-          className='absolute top-0 left-0'
-        /> */}
         <SwiperSlide className="flex items-center flex-col justify-center p-5">
           <h1 class="text-center text-violet-500 text-5xl font-bold">{weatherData.name}</h1>
           <div>
