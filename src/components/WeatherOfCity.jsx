@@ -3,13 +3,15 @@ import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Scrollbar } from 'swiper/modules';
 import iconArray from "../data/icon"
+import { useDispatch, useSelector } from 'react-redux';
 
-function WeatherOfCity({ weatherData }) {
+function WeatherOfCity() {
+  const { weatherInfo, loading, error } = useSelector(state => state.weather)
 
   function getSrc() {
     return(
       iconArray.filter(
-        arr => arr.name === weatherData.weather[0].icon
+        arr => arr.name === weatherInfo.weather[0].icon
       )[0].src
     )
   }
@@ -20,6 +22,8 @@ function WeatherOfCity({ weatherData }) {
     const minutes = date.getMinutes().toString().padStart(2, '0');
     return `${hours}:${minutes}`;
   }
+
+  if (!weatherInfo) {return (<div>Погоды нет</div>)};
   
   return (
     <div className='flex items-center justify-center min-h-screen'>
@@ -33,7 +37,7 @@ function WeatherOfCity({ weatherData }) {
         }}
       >
         <SwiperSlide className="flex items-center flex-col justify-center p-5">
-          <h1 class="text-center text-violet-500 text-5xl font-bold">{weatherData.name}</h1>
+          <h1 class="text-center text-violet-500 text-5xl font-bold">{weatherInfo.name}</h1>
           <div>
             <DotLottieReact
               src={getSrc()}
@@ -41,7 +45,7 @@ function WeatherOfCity({ weatherData }) {
               autoplay
             />
           </div>
-          <h3 className="text-center text-violet-500 text-5xl font-bold">{Math.round(weatherData?.main.temp - 273.15)} °C</h3>
+          <h3 className="text-center text-violet-500 text-5xl font-bold">{Math.round(weatherInfo?.main.temp - 273.15)} °C</h3>
         </SwiperSlide>
         <SwiperSlide
          className="text-center p-5"
@@ -49,13 +53,13 @@ function WeatherOfCity({ weatherData }) {
         >
           <div className="grid grid-cols-2 gap-4 items-center h-full text-violet-500 font-bold">
             <p>Состояние:</p>
-            <p>{weatherData.weather[0].description}</p>
+            <p>{weatherInfo.weather[0].description}</p>
             <p>Скорость ветра:</p>
-            <p>{weatherData.wind.speed} м/с</p>
+            <p>{weatherInfo.wind.speed} м/с</p>
             <p>Восход:</p>
-            <p>{getTime(weatherData.sys.sunrise)}</p>
+            <p>{getTime(weatherInfo.sys.sunrise)}</p>
             <p>Закат:</p>
-            <p>{getTime(weatherData.sys.sunset)}</p>
+            <p>{getTime(weatherInfo.sys.sunset)}</p>
           </div>
         </SwiperSlide>
       </Swiper>
