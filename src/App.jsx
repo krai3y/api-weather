@@ -7,16 +7,17 @@ import 'swiper/css/scrollbar';
 import InputSelectCity from "./components/InputSelectCity";
 import WeatherOfCity from "./components/WeatherOfCity";
 import { useSelector } from 'react-redux';
+import LoadingWeatherOfCity from "./components/LoadingWeatherOfCity";
 
 function App() {
 
-  const { weatherInfo, loading, error } = useSelector(state => state.weather)
+  const { weatherInfo } = useSelector(state => state.weather)
 
   if (!weatherInfo) {return (<main class="w-full h-dvh"><InputSelectCity/></main>)};
   
   return (
-    <main class="w-full h-dvh">
-          <WeatherOfCity/>
+    <main class="w-full h-dvh min-h-screen">
+      <WeatherOfCity/>
     </main>
   );
 }

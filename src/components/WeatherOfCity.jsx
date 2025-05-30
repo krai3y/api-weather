@@ -1,20 +1,14 @@
-import React from 'react'
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Scrollbar } from 'swiper/modules';
-import iconArray from "../data/icon"
-import { useDispatch, useSelector } from 'react-redux';
+import iconObj from "../data/icon"
+import { useSelector } from 'react-redux';
+import InputSelectCity from "./InputSelectCity"
+import LoadingWeatherOfCity from './LoadingWeatherOfCity';
+
 
 function WeatherOfCity() {
-  const { weatherInfo, loading, error } = useSelector(state => state.weather)
-
-  function getSrc() {
-    return(
-      iconArray.filter(
-        arr => arr.name === weatherInfo.weather[0].icon
-      )[0].src
-    )
-  }
+  const { weatherInfo, loading } = useSelector(state => state.weather)
 
   function getTime(time) {
     const date = new Date(time * 1000);
@@ -23,12 +17,15 @@ function WeatherOfCity() {
     return `${hours}:${minutes}`;
   }
 
-  if (!weatherInfo) {return (<div>Погоды нет</div>)};
+  if (loading) {return (<LoadingWeatherOfCity />)};
   
   return (
-    <div className='flex items-center justify-center min-h-screen'>
+    <div className='flex items-center justify-center min-h-screen flex-col'>
+      <div className="relative">
+        <InputSelectCity />
+      </div>
       <Swiper 
-        className='relative border border-violet-500 border-4 rounded-xl max-w-lg'
+        className='relative border border-violet-500 border-3 rounded-2xl max-w-xl'
         modules={[Navigation, Scrollbar]}
         navigation
         autoplay={{
@@ -38,13 +35,11 @@ function WeatherOfCity() {
       >
         <SwiperSlide className="flex items-center flex-col justify-center p-5">
           <h1 class="text-center text-violet-500 text-5xl font-bold">{weatherInfo.name}</h1>
-          <div>
             <DotLottieReact
-              src={getSrc()}
+              src={iconObj[`${weatherInfo.weather[0].icon}`]}
               loop
               autoplay
             />
-          </div>
           <h3 className="text-center text-violet-500 text-5xl font-bold">{Math.round(weatherInfo?.main.temp - 273.15)} °C</h3>
         </SwiperSlide>
         <SwiperSlide
@@ -52,14 +47,38 @@ function WeatherOfCity() {
          style={{ height: "auto" }}
         >
           <div className="grid grid-cols-2 gap-4 items-center h-full text-violet-500 font-bold">
-            <p>Состояние:</p>
-            <p>{weatherInfo.weather[0].description}</p>
-            <p>Скорость ветра:</p>
-            <p>{weatherInfo.wind.speed} м/с</p>
-            <p>Восход:</p>
-            <p>{getTime(weatherInfo.sys.sunrise)}</p>
-            <p>Закат:</p>
-            <p>{getTime(weatherInfo.sys.sunset)}</p>
+            <div className="flex flex-col">
+              <DotLottieReact
+                src={iconObj[`${weatherInfo.weather[0].icon}`]}
+                loop
+                autoplay
+              />
+              <p>{weatherInfo.weather[0].description}</p>
+            </div>
+            <div className="flex flex-col">
+              <DotLottieReact
+                src={iconObj["wind"]}
+                loop
+                autoplay
+              />
+              <p>{weatherInfo.wind.speed} м/с</p>
+            </div>
+            <div className="flex flex-col">
+              <DotLottieReact
+                src={iconObj["sunrise"]}
+                loop
+                autoplay
+              />
+              <p>{getTime(weatherInfo.sys.sunrise)}</p>
+            </div>
+            <div className="flex flex-col">
+              <DotLottieReact
+                src={iconObj["sunset"]}
+                loop
+                autoplay
+              />
+              <p>{getTime(weatherInfo.sys.sunset)}</p>
+            </div>
           </div>
         </SwiperSlide>
       </Swiper>
