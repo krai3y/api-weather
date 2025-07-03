@@ -4,6 +4,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 const token = "YOUR TOKEN"
 
+
 export const fetchWeatherData = createAsyncThunk(
   'weather/fetchWeatherData',
   async (city, { rejectWithValue }) => {

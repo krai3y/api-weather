@@ -25,7 +25,7 @@ function WeatherOfCity() {
         <InputSelectCity />
       </div>
       <Swiper 
-        className='relative border border-violet-500 border-3 rounded-2xl max-w-xl'
+        className='relative border border-violet-500 border-3 rounded-2xl w-xs md:w-xl'
         modules={[Navigation, Scrollbar]}
         navigation
         autoplay={{
